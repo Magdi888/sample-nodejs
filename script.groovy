@@ -3,7 +3,7 @@
 def BuildImage() {
     withCredentials([usernamePassword(credentialsId :'DockerHub',usernameVariable :'USER',passwordVariable :'PASSWORD')]){
        sh 'tag=$(git log --format="%H" -n 1 | cut -c 1-7)'
-       sh 'docker build -t amagdi888/nodeapp:${tag}${BUILD_ID} -f dockerfile .'
+       sh 'docker build -t amagdi888/nodeapp:${tag}${BUILD_ID} .'
        sh 'echo $PASSWORD | docker login -u $USER --password-stdin'
        sh 'docker push amagdi888/nodeapp:${tag}${BUILD_ID}'
     }
