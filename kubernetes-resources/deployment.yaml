@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodeapp
+  template:
+    metadata:
+      labels:
+        app: nodeapp
+    spec:
+      containers:
+      - name: nodeapp-container
+        image: amagdi888/nodeapp
+        ports:
+        - containerPort: 3000
+        resources:         
+          limits:          
+            cpu: 50m        
+            memory: "100Mi"
