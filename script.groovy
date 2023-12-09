@@ -18,6 +18,11 @@ def DeployToProduction() {
                         sh '''
                         tag=`git log --format="%H" -n 1 | cut -c 1-7`
                         helm upgrade --install -n blue-tide --set image.tag=${tag}${BUILD_ID} nodeapp ./helm
+                        helm install my-mongodb oci://registry-1.docker.io/bitnamicharts/mongodb
+                        helm install my-memcached oci://registry-1.docker.io/bitnamicharts/memcached
+                        helm install my-rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq
+                        helm install my-redis oci://registry-1.docker.io/bitnamicharts/redis
+
                         '''
                     }
 }
